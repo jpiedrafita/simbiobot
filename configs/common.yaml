@@ -1,0 +1,13 @@
+discord:
+  prefix: "!"
+
+config_file:
+  local: "config.local.yaml"
+  prod: "config.prod.yaml"
+
+setting1: "value1!"
+setting2: "value2!"
+
+section:
+  section_setting1: "section_value1!"
+  section_setting2: "section_value2!"
