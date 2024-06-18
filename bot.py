@@ -1,25 +1,33 @@
 import discord
+import os
+import asyncio
 from discord.ext import commands
 from config import cfg
 from common.logger import logger
 
 intents = discord.Intents.default()
 intents.message_content = True
-client = commands.Bot(command_prefix=cfg.discord.prefix, intents=intents)
 
-@client.event
+bot = commands.Bot(
+    command_prefix=cfg.discord.prefix, intents=intents, help_command=None
+)
+
+
+@bot.event
 async def on_ready():
-    print('Bot is ready.')
-    print('-------------')
-    
+    print("Bot is ready.\n-------------")
 
-@client.command()
-async def ping(ctx):
-    await ctx.send(f'Pong! {round(client.latency * 1000)}ms')
 
-@client.command()
-async def hello(ctx):
-    await ctx.send('Hola, soy Minola!')
-    logger.info("Hello command executed")
+async def load():
+    for filename in os.listdir("./cogs"):
+        if filename.endswith(".py"):
+            await bot.load_extension(f"cogs.{filename[:-3]}")
 
-client.run(cfg.discord.token)
+
+async def main():
+    async with bot:
+        await load()
+        await bot.start(cfg.discord.token)
+
+
+asyncio.run(main())

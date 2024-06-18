@@ -1,0 +1,15 @@
+{
+  "ping": {
+    "greeting": "Hi, I'm Minola",
+    "latency": "Latency in ms",
+    "user_latency": "'s latency (ms)",
+    "requested_by": "Requested by}"
+  },
+  "raid_organizer": {
+    "date": "Date:",
+    "time": "Time:",
+    "description": "Description:",
+    "join_with": "Join with ✅",
+    "event_not_found": "I didn't found the event "
+  }  
+}
