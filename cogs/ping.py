@@ -8,12 +8,20 @@ from common.logger import logger
 class Ping(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.locale = get_locale(cfg.language, cfg.discord.cogs.ping)
+        self.update_locales()
         self.aliases = get_aliases(cfg.discord.cogs.ping)
+
+    def update_locales(self):
+        self.locale = get_locale(cfg.language, cfg.discord.cogs.ping)
 
     @commands.Cog.listener()
     async def on_ready(self):
         logger.info(f"{__name__} is online!\n-------------")
+
+    @commands.Cog.listener()
+    async def on_language_change(self):
+        self.update_locales()
+        logger.info(f"Language changed to {cfg.language} for {self.__class__.__name__}")
 
     @commands.command()
     async def ping(self, ctx):
@@ -35,6 +43,7 @@ class Ping(commands.Cog):
     async def hello_command(self, ctx):
         await ctx.send(self.locale["greeting"])
         logger.info("Hello command executed")
+        logger.info(cfg.language)
 
 
 async def setup(bot):

@@ -10,9 +10,12 @@ class ConfigManager(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         self.config_file_path = f"{cfg.config_path}/{cfg.config_file.common}"
+        self.update_locales()
+
+    def update_locales(self):
         self.locale = get_locale(cfg.language, cfg.discord.cogs.config_manager)
 
-    @commands.command()
+    @commands.command(aliases=["language", "lang", "idioma"])
     @commands.has_permissions(administrator=True)
     async def change_language(self, ctx):
         # Crear un embed con las opciones de idioma
@@ -42,25 +45,19 @@ class ConfigManager(commands.Cog):
             self, "language_change_channel_id", None
         ):
             if reaction.emoji == "🇬🇧":
-                # await self.update_language("en", reaction.message.channel)
                 cfg.language = "en"
+                self.update_locales()
+                self.bot.dispatch("language_change")
+                await reaction.message.channel.send(
+                    self.locale["language_changed"].format(language="English")
+                )
             elif reaction.emoji == "🇪🇸":
-                # await self.update_language("es", reaction.message.channel)
                 cfg.language = "es"
-
-    # TODO: Implementar cambio efectivo de lenguage
-
-    # async def update_language(self, language_code, channel):
-    #     # Actualizar el idioma en la configuración y guardar el archivo
-    #     cfg["language"] = language_code
-    #     with open(self.config_file_path, "w") as config_file:
-    #         json.dump(cfg, config_file, indent=4)
-
-    #     # Informar al usuario del cambio
-    #     await channel.send(
-    #         f"Language changed to {language_code}. Please restart the bot for changes to take effect."
-    #     )
-    #     logger.info(f"Language changed to {language_code}")
+                self.update_locales()
+                self.bot.dispatch("language_change")
+                await reaction.message.channel.send(
+                    self.locale["language_changed"].format(language="Español")
+                )
 
 
 async def setup(bot):

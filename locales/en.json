@@ -1,6 +1,7 @@
 {
   "config_manager": {
-    "change_language": "Cambia el idioma",
+    "change_language": "Language change",
+    "language_changed": "Language has changed to english",
     "language_description": "Select the new language for the bot:"
   },
   "ping": {
