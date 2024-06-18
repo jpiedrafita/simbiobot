@@ -1,19 +1,23 @@
 import discord
 from discord.ext import commands
+from localization import get_locale, get_aliases
+from config import cfg
 from common.logger import logger
 
 
-class RaidOrganizer(commands.Cog):
-    def __init__(self, client):
-        self.client = client
+class EventsOrganizer(commands.Cog):
+    def __init__(self, bot):
+        self.bot = bot
+        self.locale = get_locale(cfg.language, cfg.discord.cogs.events_organizer)
+        self.aliases = get_aliases(cfg.discord.cogs.events_organizer)
         self.events = {}
 
-    @commands.command()
+    @commands.command(aliases=["create", "event", "new", "add", "crear", "evento"])
     async def create_event(
         self, ctx, name: str, date: str, time: str, description: str
     ):
         event_message = await ctx.send(
-            f"**{name}**\nFecha: {date}\nHora: {time}\n{description}\nÚnete con ✅!"
+            f"**{name}**\n{self.locale["date"]} {date}\n{self.locale["time"]} {time}\n{description}\n{self.locale["join_with_reaction"]}"
         )
         await event_message.add_reaction("✅")
         self.events[event_message.id] = {
@@ -37,17 +41,12 @@ class RaidOrganizer(commands.Cog):
                     for user_id in event["participants"]
                 ]
                 await ctx.send(
-                    f"Participantes en el evento {event_name}: {participants}"
+                    f"{self.locale.participants_in_event} {event_name}: {participants}"
                 )
                 return
-        await ctx.send(f"No se ha encontrado el evento {event_name}")
+        await ctx.send(f"{self.locale.event_not_found}: {event_name}")
 
 
-async def setup(client):
-    await client.add_cog(RaidOrganizer(client))
-    logger.info("RaidOrganizer loaded")
-
-
-def setup(client):
-    client.add_cog(RaidOrganizer(client))
-    logger.info("RaidOrganizer loaded")
+async def setup(bot):
+    await bot.add_cog(EventsOrganizer(bot))
+    logger.info("EvetnsOrganizer loaded")

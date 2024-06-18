@@ -1,0 +1,10 @@
+{
+  "ping": {
+    "hello": ["hello, hi, hola"],
+    "ping": ["pong"]
+  },
+  "events_organizer": {
+    "create_event": ["create", "event", "new", "add", "crear", "evento"],
+    "event_participants": ["participants", "asistentes", "invitados", "participantes"]
+  }
+}

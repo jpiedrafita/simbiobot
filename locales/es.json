@@ -1,15 +1,20 @@
 {
+  "config_manager": {
+    "change_language": "Cambia el idioma",
+    "language_description": "Select the new language for the bot:"
+  },
   "ping": {
     "greeting": "Hola, soy Minola",
     "latency": "Latencia en ms",
-    "user_latency": " tiene una latencia (ms) de ",
+    "user_latency": "tiene una latencia (ms) de",
     "requested_by": "Solicitado por"
   },
-  "raid_organizer": {
+  "events_organizer": {
     "date": "Fecha:",
     "time": "Hora:",
     "description": "Descripción:",
-    "join_with": "Únete con ✅",
-    "event_not_found": "No se ha encontrado el evento "
-  }  
+    "join_with_reaction": "Únete con ✅",
+    "event_not_found": "No se ha encontrado el evento",
+    "participants_in_event": "Participantes en el evento"
+  }
 }

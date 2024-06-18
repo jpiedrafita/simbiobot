@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from localization import get_locale
+from localization import get_locale, get_aliases
 from config import cfg
 from common.logger import logger
 
@@ -8,7 +8,8 @@ from common.logger import logger
 class Ping(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.locale = get_locale(cfg.language, "ping")
+        self.locale = get_locale(cfg.language, cfg.discord.cogs.ping)
+        self.aliases = get_aliases(cfg.discord.cogs.ping)
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -30,11 +31,13 @@ class Ping(commands.Cog):
         await ctx.send(embed=ping_embed)
         logger.info("Ping command executed")
 
-    @commands.command()
-    async def hello(self, ctx):
+    @commands.command(aliases=["hola", "hello", "hi"])
+    async def hello_command(self, ctx):
         await ctx.send(self.locale["greeting"])
         logger.info("Hello command executed")
 
 
 async def setup(bot):
     await bot.add_cog(Ping(bot))
+    logger.info("Ping loaded")
+

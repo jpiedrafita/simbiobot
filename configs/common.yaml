@@ -1,15 +1,17 @@
 discord:
   prefix: "!"
+  cogs:
+    events_organizer: "events_organizer"
+    ping: "ping"
+    config_manager: "config_manager"
 
+config_path: "configs"
 config_file:
+  common: "common.yaml"
+  default: "config.yaml"
   local: "config.local.yaml"
   prod: "config.prod.yaml"
 cogs_dir: "./cogs"
 language: "es"
-
-setting1: "value1!"
-setting2: "value2!"
-
-section:
-  section_setting1: "section_value1!"
-  section_setting2: "section_value2!"
+locales_path: "locales/"
+aliases_file: "locales/aliases.json"
