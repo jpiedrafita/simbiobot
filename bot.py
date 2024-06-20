@@ -7,6 +7,9 @@ from common.logger import logger
 
 intents = discord.Intents.default()
 intents.message_content = True
+intents.members = True
+intents.messages = True
+intents.reactions = True
 
 bot = commands.Bot(
     command_prefix=cfg.discord.prefix, intents=intents, help_command=None

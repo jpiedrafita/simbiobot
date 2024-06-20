@@ -4,6 +4,10 @@ discord:
     events_organizer: "events_organizer"
     ping: "ping"
     config_manager: "config_manager"
+  events_organizer:
+    participants_emoji: "✅"
+    substitutes_emoji: "🅿️"
+    max_substitutes: 3
 
 config_path: "configs"
 config_file:
@@ -15,3 +19,6 @@ cogs_dir: "./cogs"
 language: "es"
 locales_path: "locales/"
 aliases_file: "locales/aliases.json"
+timeout: 60
+events_channel: "eventos"
+events_channel_id: 1253305354717102080

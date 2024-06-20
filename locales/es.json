@@ -2,7 +2,8 @@
   "config_manager": {
     "change_language": "Cambia el idioma",
     "language_changed": "El idioma ha sido cambiado a español",
-    "language_description": "Select the new language for the bot:"
+    "language_description": "Select the new language for the bot:",
+    "channel_changed": "El canal de eventos ha sido cambiado a "
   },
   "ping": {
     "greeting": "Hola, soy Minola",
@@ -14,8 +15,16 @@
     "date": "Fecha:",
     "time": "Hora:",
     "description": "Descripción:",
-    "join_with_reaction": "Únete con ✅",
+    "capacity": "Escuadra:",
+    "creator": "Creador:",
+    "players": "Jugadores:",
+    "substitutes": "Suplentes:",
+    "join_with_reaction": "Únete con ✅, suplente con 🅿️",
     "event_not_found": "No se ha encontrado el evento",
-    "participants_in_event": "Participantes en el evento"
+    "participants_in_event": "Participantes en el evento",
+    "redirect_message": "Evento creado en el canal ",
+    "invalid_date": "A ver, retrasado ¿es que no te enseñaron en el colegio a escribir bien las fechas?. Usa uno de los siguientes formatos: 'dd-mm-yyyy', 'dd/mm/yyyy', 'yyyy-mm-dd'.",
+    "invalid_time": "Pon bien la hora, subnormal 'HH:MM'.",
+    "invalid_capacity": "Aprende los núemeros de 2 a 12, imbécil."
   }
 }

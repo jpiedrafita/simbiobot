@@ -16,7 +16,7 @@ class Ping(commands.Cog):
 
     @commands.Cog.listener()
     async def on_ready(self):
-        logger.info(f"{__name__} is online!\n-------------")
+        logger.info(f"*******{__name__} is online!*******")
 
     @commands.Cog.listener()
     async def on_language_change(self):
