@@ -15,3 +15,6 @@ cogs_dir: "./cogs"
 language: "es"
 locales_path: "locales/"
 aliases_file: "locales/aliases.json"
+timeout: 60
+events_channel: "eventos"
+events_channel_id: 1253305354717102080

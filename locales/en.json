@@ -2,7 +2,8 @@
   "config_manager": {
     "change_language": "Language change",
     "language_changed": "Language has changed to english",
-    "language_description": "Select the new language for the bot:"
+    "language_description": "Select the new language for the bot:",
+    "channel_changed": "Events hannel has changed to"
   },
   "ping": {
     "greeting": "Hi, I'm Minola",
@@ -14,8 +15,13 @@
     "date": "Date:",
     "time": "Time:",
     "description": "Description:",
-    "join_with_reaction": "Join with ✅",
+    "capacity": "Squad:",
+    "join_with_reaction": "Join with ✅, substitute with 🅿️",
     "event_not_found": "I didn't found the event ",
-    "participants_in_event": "Participants in event"
+    "participants_in_event": "Participants in event",
+    "redirect_message": "Event created in chabnel ",
+    "invalid_date": "Invalid date format. Please use one of the following formats: 'dd-mm-yyyy', 'dd/mm/yyyy', 'yyyy-mm-dd'.",
+    "invalid_time": "Invalid time format. Please use 'HH:MM'.",
+    "invalid_capacity": "Invalid capacity. Please use a number between 2 and 12"
   }  
 }

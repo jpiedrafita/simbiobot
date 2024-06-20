@@ -1,2 +1,2 @@
-setting2: "local_value2"
-setting3: "local_value3" 
+events_channel: "eventos"
+events_channel_id: 1253305354717102080

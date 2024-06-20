@@ -50,6 +50,9 @@ class Config:
         else:
             setattr(self.data, name, value)
 
+    def exists(self, name):
+        return hasattr(self.data, name)
+
 
 # Singleton instance
 cfg = Config()

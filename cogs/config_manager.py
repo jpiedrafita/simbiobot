@@ -35,6 +35,14 @@ class ConfigManager(commands.Cog):
         self.language_change_message_id = message.id
         self.language_change_channel_id = ctx.channel.id
 
+    @commands.command(aliases=["canal_eventos"])
+    async def set_event_channel(self, ctx, channel: discord.TextChannel):
+        cfg.events_channel_id = channel.id
+        cfg.events_channel = channel.name
+        # await ctx.send(f"Event channel has been set to {channel.mention}")
+        await ctx.send(f"{self.locale["channel_changed"]}{channel.mention}")
+        logger.info(f"Event channel has been set to: {channel.name} - {channel.id}")
+
     @commands.Cog.listener()
     async def on_reaction_add(self, reaction, user):
         if user.bot:
