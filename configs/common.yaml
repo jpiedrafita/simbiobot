@@ -4,6 +4,10 @@ discord:
     events_organizer: "events_organizer"
     ping: "ping"
     config_manager: "config_manager"
+  events_organizer:
+    participants_emoji: "✅"
+    substitutes_emoji: "🅿️"
+    max_substitutes: 3
 
 config_path: "configs"
 config_file:
