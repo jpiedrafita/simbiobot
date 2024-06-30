@@ -2,3 +2,5 @@ discord.py==2.3.2
 python-dotenv==1.0.1
 python_box==7.2.0
 ruamel.base==1.0.0
+ruamel.yaml==0.18.6
+aiohttp==3.9.5

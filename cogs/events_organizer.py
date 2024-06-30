@@ -14,11 +14,9 @@ class EventsOrganizer(commands.Cog):
         self.locale = get_locale(cfg.language, cfg.discord.cogs.events_organizer)
         self.aliases = get_aliases(cfg.discord.cogs.events_organizer)
 
-
     @commands.Cog.listener()
     async def on_ready(self):
         logger.info(f"*******{__name__} is online!*******")
-
 
     @commands.command(aliases=["create", "event", "new", "add", "crear", "evento"])
     async def create_event(
@@ -60,18 +58,20 @@ class EventsOrganizer(commands.Cog):
                 embed=embed
             )
             redirect_message = await ctx.send(
-            f"**{name}**\n"
-            f"{self.locale["date"]} {date}\n"
-            f"{self.locale["time"]} {time}\n"
-            f"{description}\n"
-            f"{self.locale["redirect_message"]} {self.bot.get_channel(cfg.events_channel_id).mention}"
-        )
+                f"**{name}**\n"
+                f"{self.locale['date']} {date}\n"
+                f"{self.locale['time']} {time}\n"
+                f"{description}\n"
+                f"{self.locale['redirect_message']} {self.bot.get_channel(cfg.events_channel_id).mention}"
+            )
             id = cfg.events_channel_id
         else:
             event_message = await ctx.send(embed=embed)
             id = ctx.channel.id
 
-        await event_message.add_reaction(cfg.discord.events_organizer.participants_emoji)
+        await event_message.add_reaction(
+            cfg.discord.events_organizer.participants_emoji
+        )
         await event_message.add_reaction(cfg.discord.events_organizer.substitutes_emoji)
 
         # TODO: Schedule reminders and cleanup
@@ -79,10 +79,7 @@ class EventsOrganizer(commands.Cog):
         # self.schedule_reminders(event_message.id, event_datetime)
         # self.schedule_cleanup(event_message.id, event_datetime)
 
-        logger.info(
-            f"Event {event_message.id} created: "
-        )
-
+        logger.info(f"Event {event_message.id} created: ")
 
     @commands.Cog.listener()
     async def on_reaction_add(self, reaction, user):
@@ -93,7 +90,6 @@ class EventsOrganizer(commands.Cog):
             if embed.footer.text == self.locale["join_with_reaction"]:
                 print("Adding reaction")
                 await self.update_event_participants(reaction, user)
-
 
     @commands.Cog.listener()
     async def on_reaction_remove(self, reaction, user):
@@ -109,6 +105,7 @@ class EventsOrganizer(commands.Cog):
     @commands.Cog.listener()
     async def on_raw_reaction_remove(self, payload):
         print(f"Removing RAW reaction {payload}")
+
     @commands.Cog.listener()
     async def on_raw_reaction_add(self, payload):
         print(f"Adding RAW reaction {payload}")
@@ -117,16 +114,23 @@ class EventsOrganizer(commands.Cog):
     async def update_event_participants(self, reaction, user):
         message = reaction.message
         embed = message.embeds[0]
-        capacity_field = next(field for field in embed.fields if field.name == self.locale["capacity"])
-        players_field = next(field for field in embed.fields if field.name == self.locale["players"])
-        substitutes_field = next(field for field in embed.fields if field.name == self.locale["substitutes"])
-        capacity = int(capacity_field.value.split('/')[1])
-        players = players_field.value.split('\n') if players_field.value else []
-        substitutes = substitutes_field.value.split('\n') if substitutes_field.value else []
+        capacity_field = next(
+            field for field in embed.fields if field.name == self.locale["capacity"]
+        )
+        players_field = next(
+            field for field in embed.fields if field.name == self.locale["players"]
+        )
+        substitutes_field = next(
+            field for field in embed.fields if field.name == self.locale["substitutes"]
+        )
+        capacity = int(capacity_field.value.split("/")[1])
+        players = players_field.value.split("\n") if players_field.value else []
+        substitutes = (
+            substitutes_field.value.split("\n") if substitutes_field.value else []
+        )
 
         print("Reaction: ", reaction.emoji)
         print("user:", user.display_name)
-
 
         if reaction.emoji == cfg.discord.events_organizer.participants_emoji:
             if user.display_name in players:
@@ -135,7 +139,7 @@ class EventsOrganizer(commands.Cog):
                 players.append(user.display_name)
                 if user.display_name in substitutes:
                     substitutes.remove(user.display_name)
-        
+
         if reaction.emoji == cfg.discord.events_organizer.substitutes_emoji:
             if user.display_name in substitutes:
                 substitutes.remove(user.display_name)
@@ -147,21 +151,19 @@ class EventsOrganizer(commands.Cog):
         embed.set_field_at(
             embed.fields.index(players_field),
             name=self.locale["players"],
-            value="\n".join(players) if players else ""
+            value="\n".join(players) if players else "",
         )
         embed.set_field_at(
             embed.fields.index(substitutes_field),
             name=self.locale["substitutes"],
-            value="\n".join(substitutes) if substitutes else ""
+            value="\n".join(substitutes) if substitutes else "",
         )
         embed.set_field_at(
             embed.fields.index(capacity_field),
             name=self.locale["capacity"],
-            value=f"{len(players)}({len(substitutes)})/{capacity}"
+            value=f"{len(players)}({len(substitutes)})/{capacity}",
         )
         await message.edit(embed=embed)
-
- 
 
 
 async def setup(bot):

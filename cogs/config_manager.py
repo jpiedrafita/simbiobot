@@ -40,7 +40,7 @@ class ConfigManager(commands.Cog):
         cfg.events_channel_id = channel.id
         cfg.events_channel = channel.name
         # await ctx.send(f"Event channel has been set to {channel.mention}")
-        await ctx.send(f"{self.locale["channel_changed"]}{channel.mention}")
+        await ctx.send(f"{self.locale['channel_changed']}{channel.mention}")
         logger.info(f"Event channel has been set to: {channel.name} - {channel.id}")
 
     @commands.Cog.listener()
