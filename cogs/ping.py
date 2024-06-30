@@ -29,12 +29,13 @@ class Ping(commands.Cog):
             title="Ping", description=self.locale["latency"], color=discord.Color.blue()
         )
         ping_embed.add_field(
-            name=f"{self.bot.user.name}{self.locale["user_latency"]}",
+            name=f"{self.bot.user.name}{self.locale['user_latency']}",
             value=f"{round(self.bot.latency * 1000)}ms",
             inline=False,
         )
         ping_embed.set_footer(
-            text=f"{self.locale["requested_by"]} {ctx.author.name}.", icon_url=ctx.author.avatar
+            text=f"{self.locale['requested_by']} {ctx.author.name}.",
+            icon_url=ctx.author.avatar,
         )
         await ctx.send(embed=ping_embed)
         logger.info("Ping command executed")
@@ -49,4 +50,3 @@ class Ping(commands.Cog):
 async def setup(bot):
     await bot.add_cog(Ping(bot))
     logger.info("Ping loaded")
-
